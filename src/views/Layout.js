@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { ToggleButton } from "../components/Buttons";
+import NavItem, { SidebarCtx } from "../components/NavItem";
 
 const SidebarStyle = styled.aside`
   top: 0;
@@ -27,51 +28,11 @@ const SidebarStyle = styled.aside`
   }
 `;
 
-const NavItemStyle = styled.li`
-  color: white;
-  transition: background-color 0.2s ease;
-
-  > div {
-    border-bottom: solid 1px rgba(0, 0, 0, 0.16);
-  }
-
-  .icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 30px;
-      height: 30px;
-    }
-  }
-
-  span {
-    font: medium 1rem "Helvetica Neue";
-  }
-
-  ${props =>
-    props.active &&
-    css`
-      color: #196bd8;
-      .icon {
-        background-color: #cee6ff;
-      }
-
-      ${props =>
-        props.showBg &&
-        css`
-          background-color: #cee6ff;
-        `}
-    `}
-`;
 const navLinks = [
   {
     icon: require("../assets/icons/time-left.svg"),
-    text: "Operations"
+    text: "Operations",
+    activity: 8
   },
   {
     icon: require("../assets/icons/file.svg"),
@@ -79,7 +40,8 @@ const navLinks = [
   },
   {
     icon: require("../assets/icons/shopping-cart.svg"),
-    text: "Supply Store"
+    text: "Supply Store",
+    activity: 30
   },
   {
     icon: require("../assets/icons/supply.svg"),
@@ -90,25 +52,6 @@ const navLinks = [
     text: "Forums"
   }
 ];
-
-const NavItem = ({ icon, active, children }) => {
-  const ctx = useContext(SidebarCtx);
-
-  return (
-    <NavItemStyle
-      showBg={ctx.expanded}
-      active={active}
-      className="nav-item w-full block px-3"
-    >
-      <div className="py-2 w-full flex items-center">
-        <span className="icon mr-5">{icon}</span>
-        <span>{children}</span>
-      </div>
-    </NavItemStyle>
-  );
-};
-
-const SidebarCtx = React.createContext({ expanded: false });
 
 export const SideBar = props => {
   const [showNav, setShowNav] = useState(false);
@@ -124,7 +67,10 @@ export const SideBar = props => {
           <NavItem active={true}>Dashboard</NavItem>
           {navLinks.map(e => {
             return (
-              <NavItem icon={<img src={e.icon} alt={e.text} />}>
+              <NavItem
+                activity={e.activity}
+                icon={<img src={e.icon} alt={e.text} />}
+              >
                 {e.text}
               </NavItem>
             );
