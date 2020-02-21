@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { ToggleButton } from "../components/Buttons";
 import NavItem, { SidebarCtx } from "../components/NavItem";
+import Header from "../components/Header";
 
 const SidebarStyle = styled.aside`
   top: 0;
@@ -65,9 +66,10 @@ export const SideBar = props => {
         </div>
         <nav className="-mx-3" style={{ minWidth: "15rem" }}>
           <NavItem active={true}>Dashboard</NavItem>
-          {navLinks.map(e => {
+          {navLinks.map((e, idx) => {
             return (
               <NavItem
+                key={idx}
                 activity={e.activity}
                 icon={<img src={e.icon} alt={e.text} />}
               >
@@ -93,16 +95,12 @@ export const SideBar = props => {
   );
 };
 
-export const Header = () => {
-  return (
-    <header className="sticky p-5 bg-green-500" style={{ top: 0 }}>
-      <nav>Hello John</nav>
-    </header>
-  );
-};
-
 const MainArea = ({ children }) => {
-  return <main className="p-5 pb-0">{children}</main>;
+  return (
+    <main className="p-5 pb-0 relative" style={{ zIndex: 3 }}>
+      {children}
+    </main>
+  );
 };
 
 const Layout = ({ children }) => {
@@ -110,7 +108,7 @@ const Layout = ({ children }) => {
     <section className="flex min-h-screen">
       <SideBar expand={true}></SideBar>
       <section className="flex-1" style={{ height: "500vh" }}>
-        <Header></Header>
+        <Header />
         <MainArea>{children}</MainArea>
       </section>
     </section>
