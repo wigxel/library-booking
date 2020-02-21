@@ -7,11 +7,14 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.3.0"
+    "react-scripts": "^3.3.0",
+    "styled-components": "^5.0.1",
+    "tailwindcss": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:styles": "postcss src/assets/css/tailwind.css -o src/styles.css",
     "react:test": "react-scripts test",
     "test": "echo 're-enable when you have jest tests' && exit 0",
     "eject": "react-scripts eject"
@@ -32,6 +35,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^4.3.4"
+    "@types/react-router-dom": "^4.3.4",
+    "autoprefixer": "^9.7.4",
+    "postcss-cli": "^7.1.0",
+    "postcss-preset-env": "^6.7.0"
   }
 }
