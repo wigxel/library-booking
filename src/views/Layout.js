@@ -105,7 +105,10 @@ const MainArea = ({ children }) => {
 
 const Layout = ({ children }) => {
   return (
-    <section className="flex min-h-screen">
+    <section
+      className="flex min-h-screen"
+      style={{ backgroundColor: "#FCFCFC" }}
+    >
       <SideBar expand={true}></SideBar>
       <section className="flex-1" style={{ height: "500vh" }}>
         <Header />

@@ -7,6 +7,7 @@ const HeaderStyle = styled.header`
   height: 80px;
   display: flex;
   position: sticky;
+  box-shadow: 0px 1px 25px #1877ff1c;
 
   .sec-nav {
     > * {
@@ -43,7 +44,6 @@ const SearcInputStyle = styled.div`
   input {
     flex: 1 1;
     margin-right: -222px;
-    ${"" /* background-color: orange; */}
     box-sizing: border-box;
     transition: all 0.3s ease-out;
   }
@@ -95,7 +95,7 @@ const SearchInput = props => {
 
 const Header = () => {
   return (
-    <HeaderStyle className="bg-white sticky p-3 shadow px-5" style={{ top: 0 }}>
+    <HeaderStyle className="bg-white sticky p-3 px-5" style={{ top: 0 }}>
       <div className="flex justify-between container mx-auto">
         <embed
           src={require("../assets/icons/logo.svg")}

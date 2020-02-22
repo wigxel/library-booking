@@ -7,7 +7,6 @@ const App = () => {
   return (
     <Router>
       <Layout>
-        <h1>We ready to roll</h1>
         <Switch>
           <Route path="/" component={Home}></Route>
         </Switch>

@@ -40,3 +40,40 @@ export const ToggleButton = ({ state, onClick }) => (
     <span></span>
   </ToggleButtonStyle>
 );
+
+const TabStyle = styled.div`
+  span:last-child {
+    color: white;
+    border-radius: 30px;
+    background-color: var(--red-color);
+  }
+
+  ${prop =>
+    prop.isActive &&
+    css`
+      border-bottom: solid 4px var(--primary-color);
+
+      span:first-child {
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+
+      span:last-child {
+        color: gray;
+        background-color: transparent;
+        opacity: 0.5;
+      }
+    `}
+`;
+
+export function Tab(props) {
+  return (
+    <TabStyle
+      isActive={props.isActive}
+      className="p-4 border-gray-200 border-r flex items-center text-sm"
+    >
+      <span className="mr-2">{props.children}</span>
+      <span className="px-2 text-xs">{props.count}</span>
+    </TabStyle>
+  );
+}
