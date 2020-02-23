@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { ToggleButton } from "../components/Buttons";
 import NavItem, { SidebarCtx } from "../components/NavItem";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const SidebarStyle = styled.aside`
   top: 0;
@@ -110,9 +111,10 @@ const Layout = ({ children }) => {
       style={{ backgroundColor: "#FCFCFC" }}
     >
       <SideBar expand={true}></SideBar>
-      <section className="flex-1" style={{ height: "500vh" }}>
+      <section className="flex-1">
         <Header />
         <MainArea>{children}</MainArea>
+        <Footer />
       </section>
     </section>
   );
