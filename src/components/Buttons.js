@@ -42,7 +42,7 @@ export const ToggleButton = ({ state, onClick }) => (
 );
 
 const TabStyle = styled.div`
-  span:last-child {
+  .count-badge {
     color: white;
     border-radius: 30px;
     background-color: var(--red-color);
@@ -58,7 +58,7 @@ const TabStyle = styled.div`
         color: var(--primary-color);
       }
 
-      span:last-child {
+      .count-badge {
         color: gray;
         background-color: transparent;
         opacity: 0.5;
@@ -72,8 +72,15 @@ export function Tab(props) {
       isActive={props.isActive}
       className="p-4 border-gray-200 border-r flex items-center text-sm"
     >
-      <span className="mr-2">{props.children}</span>
-      <span className="px-2 text-xs">{props.count}</span>
+      <span>{props.children}</span>
+      {props.count && (
+        <span className="count-badge px-2 text-xs ml-2">{props.count}</span>
+      )}
     </TabStyle>
   );
 }
+
+Tab.Holder = styled.div`
+  display: flex;
+  justify-content: start;
+`;

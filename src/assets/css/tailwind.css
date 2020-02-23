@@ -8,3 +8,7 @@
   --primary-color: #007bff;
   --red-color: #ff0000;
 }
+
+.object-fit-cover {
+  object-fit: cover;
+}

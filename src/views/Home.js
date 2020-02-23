@@ -1,6 +1,7 @@
 import React from "react";
 import { Tab } from "../components/Buttons";
-import { product } from "ramda";
+import { Product } from "../components/Product";
+import { RUSH_SHIPPING, PICKUP_ORDER } from "../libs/constants";
 
 const columns = [
   { name: "Order #" },
@@ -32,58 +33,7 @@ const columns = [
   }
 ];
 
-const Product = {
-  TableItem(props) {
-    return (
-      <tr className="text-sm mb-3">
-        <td className="px-3 py-8 bg-white">
-          <input type="checkbox" />
-        </td>
-        <td className="text-xs bg-white">{props.orderId}</td>
-        <td className="text-xs bg-white">{props.item}</td>
-        <td className="text-xs bg-white">{props.details}</td>
-        <td className="bg-white">
-          <div
-            className="p-3 rounded-lg text-center inline-block"
-            style={{ backgroundColor: props.colors[1].color }}
-          >
-            {props.colors[1].name}
-          </div>
-        </td>
-        <td className="font-bold bg-white">L X {props.quantity}</td>
-        <td className="font-bold bg-white">{props.printType}</td>
-        <td className="w-32 bg-white">
-          {props.deliveryMethod === RUSH_SHIPPING && (
-            <div className="flex">
-              <img
-                src={require("../assets/icons/clock.svg")}
-                alt="icon"
-                className="w-5 mr-2"
-              />
-              <span className="text-red-600 ">
-                Rush <br /> Shipping
-              </span>
-            </div>
-          )}
-          {props.deliveryMethod === PICKUP_ORDER && (
-            <span className="text-blue-600">Pickup Order</span>
-          )}
-        </td>
-        <td className="bg-white">{props.deliveryTime}</td>
-        <td className="bg-white text-green-600">
-          Running <br />
-          {props.productionStatus.currentStep} of{" "}
-          {props.productionStatus.totalSteps}
-        </td>
-      </tr>
-    );
-  }
-};
-
-const RUSH_SHIPPING = Symbol("Rush");
-const PICKUP_ORDER = Symbol("Pickup");
-
-const rows = [
+export const rows = [
   {
     orderId: "#232JODJSDKN2",
     item: "#232JODJSDKN2",
@@ -150,7 +100,7 @@ const Home = () => {
         </div>
 
         <div className="text-right flex-1">
-          <button className="border border-gray-200 rounded-lg px-3 py-2 text-sm mr-4">
+          <button className="border border-gray-200 rounded-lg px-3 py-2 text-sm">
             Print Worksheet
           </button>
           <select className="appearance-none max-w-xs px-3 py-2 text-gray-600 rounded-md mr-4 text-sm">
@@ -163,9 +113,9 @@ const Home = () => {
       </section>
       <table className="table w-full">
         <tr className="bg-gray-200">
-          <td className="px-3" width="50">
+          <th className="px-3" width="50">
             <input type="checkbox" />
-          </td>
+          </th>
           {columns.map(e => (
             <th width={e.width} className="text-sm text-left">
               {e.name}
