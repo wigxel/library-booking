@@ -4,6 +4,7 @@ import { ToggleButton } from "../components/Buttons";
 import NavItem, { SidebarCtx } from "../components/NavItem";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { IconLinks } from '../components/Icons';
 
 const SidebarStyle = styled.aside`
   top: 0;
@@ -32,25 +33,29 @@ const SidebarStyle = styled.aside`
 
 const navLinks = [
   {
-    icon: require("../assets/icons/time-left.svg"),
+    icon: IconLinks.FileGray,
+    text: "Dashboard",
+  },
+  {
+    icon: IconLinks.Clock,
     text: "Operations",
     activity: 8
   },
   {
-    icon: require("../assets/icons/file.svg"),
+    icon: IconLinks.File,
     text: "Records"
   },
   {
-    icon: require("../assets/icons/shopping-cart.svg"),
+    icon: IconLinks.Cart,
     text: "Supply Store",
     activity: 30
   },
   {
-    icon: require("../assets/icons/supply.svg"),
+    icon: IconLinks.Supply,
     text: "Market Place"
   },
   {
-    icon: require("../assets/icons/chat.svg"),
+    icon: IconLinks.Chat,
     text: "Forums"
   }
 ];
@@ -66,10 +71,10 @@ export const SideBar = props => {
           <div className="border-b border-black opacity-25 w-full"></div>
         </div>
         <nav className="-mx-3" style={{ minWidth: "15rem" }}>
-          <NavItem active={true}>Dashboard</NavItem>
           {navLinks.map((e, idx) => {
             return (
               <NavItem
+                active={e.text === 'Operations'}
                 key={idx}
                 activity={e.activity}
                 icon={<img src={e.icon} alt={e.text} />}
@@ -83,7 +88,7 @@ export const SideBar = props => {
           <NavItem
             icon={
               <img
-                src={require("../assets/icons/settings.svg")}
+                src={IconLinks.Settings}
                 alt="Settings"
               />
             }
@@ -98,7 +103,7 @@ export const SideBar = props => {
 
 const MainArea = ({ children }) => {
   return (
-    <main className="p-5 pb-0 relative" style={{ zIndex: 3 }}>
+    <main className="p-5 pb-0 relative min-h-screen" style={{ zIndex: 3 }}>
       {children}
     </main>
   );

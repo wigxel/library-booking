@@ -1,5 +1,6 @@
 import React from "react";
 import t from "prop-types";
+import { IconLinks as Icons } from './Icons';
 
 export default function Footer() {
   return (
@@ -12,10 +13,10 @@ export default function Footer() {
         <div className="flex" style={{gap: '1rem'}}>
           <FooterIcon
             alt="Apple Icon"
-            icon={require("../assets/icons/apple.svg")}
+            icon={Icons.Apple}
           />
           <FooterIcon
-            icon={require("../assets/icons/google-play-store.svg")}
+            icon={Icons.GooglePlayStore}
             alt="Play Store"
           />
         </div>
@@ -38,16 +39,16 @@ export default function Footer() {
         <FooterHeading>Connect Us</FooterHeading>
         <div className="flex" style={{gap: '1rem'}}>
           <FooterIcon
-            icon={require("../assets/icons/twitter.svg")}
+            icon={Icons.Twitter}
             alt="Twitter"
           />
           <FooterIcon
-            icon={require("../assets/icons/facebook.svg")}
+            icon={Icons.Facebook}
             alt="Facebook"
           />
           <FooterIcon
-            icon={require("../assets/icons/instagram.svg")}
-            alt="Facebook"
+            icon={Icons.Instagram}
+            alt="Instagram"
           />
         </div>
       </div>

@@ -83,7 +83,7 @@ const Home = () => {
             options={Select.options(["Categories", "Rush Shipping", "Pickup Order"])}
             onChange={console.log}>
           </Select>
-          <div className="flex bg-gray-200 hover:bg-gray-300 rounded-md flex-1 px-4 py-2">
+          <div className="flex bg-gray-200 hover:bg-gray-300 ml-2 rounded-md flex-1 px-4 py-2">
             <img
               src={require("../assets/icons/magnifying-glass.svg")}
               alt="search"
