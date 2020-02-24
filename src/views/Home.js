@@ -1,5 +1,7 @@
 import React from "react";
+import Icons from "../components/Icons";
 import { Tab } from "../components/Buttons";
+import Select from '../components/Select';
 import { Product } from "../components/Product";
 import { RUSH_SHIPPING, PICKUP_ORDER } from "../libs/constants";
 
@@ -12,23 +14,23 @@ const columns = [
   { name: "Print Type" },
   {
     name: (
-      <>
+      <React.Fragment>
         Delivery <br /> Method
-      </>
+      </React.Fragment>
     )
   },
   {
     name: (
-      <>
+      <React.Fragment>
         Delivery <br /> Time
-      </>
+      </React.Fragment>
     )
   },
   {
     name: (
-      <>
+      <React.Fragment>
         Production <br /> Status
-      </>
+      </React.Fragment>
     )
   }
 ];
@@ -70,16 +72,18 @@ export const rows = [
 
 const Home = () => {
   return (
-    <>
+    <React.Fragment>
       <section className="flex items-center justify-between mb-10">
-        <h1 className="text-2xl">Production House</h1>
+        <h1 className="text-2xl">
+          {Icons.Package}
+          Production House
+        </h1>
         <div className="flex">
-          <select className="appearance-none max-w-xs px-4 py-2 text-white rounded-md bg-primary mr-4">
-            <option>Categories</option>
-            <option>Tops</option>
-            <option>Sweat Shirts</option>
-          </select>
-          <div className="flex bg-gray-400 rounded-md flex-1 px-4 py-2">
+         <Select withBg={true}
+            options={Select.options(["Categories", "Rush Shipping", "Pickup Order"])}
+            onChange={console.log}>
+          </Select>
+          <div className="flex bg-gray-200 hover:bg-gray-300 rounded-md flex-1 px-4 py-2">
             <img
               src={require("../assets/icons/magnifying-glass.svg")}
               alt="search"
@@ -100,13 +104,15 @@ const Home = () => {
         </div>
 
         <div className="text-right flex-1">
-          <button className="border border-gray-200 rounded-lg px-3 py-2 text-sm">
+          <button className="border border-gray-200 rounded-lg px-3 py-2 text-sm mr-4">
             Print Worksheet
           </button>
-          <select className="appearance-none max-w-xs px-3 py-2 text-gray-600 rounded-md mr-4 text-sm">
-            <option>Make as Categories</option>
-          </select>
-          <button className="border bg-gray-500 opacity-50 border-gray-500 rounded-lg px-3 py-2 text-sm">
+          <Select noBorder={true}
+            className="w-32"
+            options={Select.options(["Make a category", "Something", "Nothing"])}
+            onChange={console.log}>
+          </Select>
+          <button className="ml-4 border bg-gray-500 opacity-50 border-gray-500 rounded-lg px-3 py-2 text-sm">
             Save
           </button>
         </div>
@@ -122,11 +128,11 @@ const Home = () => {
             </th>
           ))}
         </tr>
-        {rows.map(e => (
-          <Product.TableItem {...e} />
+        {rows.map((e, idx) => (
+          <Product.TableItem key={idx} zIndex={(rows.length - idx)} {...e} />
         ))}
       </table>
-    </>
+    </React.Fragment>
   );
 };
 

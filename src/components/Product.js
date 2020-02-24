@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Tab } from "./Buttons";
+import { Tab, Button } from "./Buttons";
+import Icons from "./Icons";
 import { map } from "ramda";
 import { Link } from "react-router-dom";
 import { rows } from "../views/Home";
 import { RUSH_SHIPPING, PICKUP_ORDER } from "../libs/constants";
+import Select from './Select';
 
 const Card = styled.div`
   width: 100%;
@@ -20,8 +22,8 @@ const ProductInfoStyle = styled(Card)`
   padding: 2.5rem 2.5rem;
 
   & > section {
-    min-width: 10rem;
     padding: 1px 1.5rem;
+    flex-grow: 1;
 
     &:not(:last-child) {
       border-right: solid 1px rgba(0, 0, 0, 0.16);
@@ -44,8 +46,11 @@ export const OrderDetails = () => {
 
       <section className="flex flex-col">
         <div>Delivery Method</div>
-        <div className="text-sm">
-          <div className="text-primary mt-2">Pickup Order</div>
+        <div className="text-xs">
+           <Select noBorder={true} canEdit={true} 
+            options={Select.options([ "Rush Shipping", "Pickup Order"])}
+            onChange={console.log}>
+          </Select>
         </div>
       </section>
       <section className="flex flex-col">
@@ -77,7 +82,20 @@ export const OrderDetails = () => {
   );
 };
 
+const categoryOptions = [
+  Select.option("Full Production", {
+    value: "full",
+    icon: <Select.Icon src={require('../assets/icons/apple.svg')} alt="full production" /> 
+  }),
+  Select.option("Partial Production", { 
+    value: "partial",
+    icon: <Select.Icon src={require('../assets/icons/apple.svg')} alt="partial production"/> 
+  }),
+];
+
 export const ProductDetails = () => {
+  const [option, setOption] = useState("Workspace");
+
   return (
     <Card>
       <div className="flex justify-between pt-4 border-b mb-2 border-gray-200">
@@ -86,21 +104,23 @@ export const ProductDetails = () => {
           <Tab>History / Notes</Tab>
         </Tab.Holder>
 
-        <div className="flex items-center">
-          <select className="appearance-none max-w-xs px-3 py-2 text-gray-600 rounded-md mx-2 text-sm">
-            <option>Worksheet</option>
-          </select>
-          <button className="border bg-gray-500 px-4 opacity-50 border-gray-500 rounded-lg px-3 mx-2 py-2 text-sm">
+        <div className="flex items-center pr-6">
+          <Select noBorder={true}
+            options={Select.options(["Worksheet", "Invoice"])}
+            onChange={(val) => setOption(val)}>
+          </Select>
+          <Button disabled={option !== 'Invoice'}>
             Print
-          </button>
+          </Button>
           <button className="border border-gray-200 rounded-lg px-4 py-2 text-sm mx-2">
-            Add Note
+            {Icons.FileGray}
+            <span>Add Note</span>
           </button>
-          <select className="appearance-none max-w-xs px-4 py-2 text-white rounded-md bg-primary mx-2">
-            <option>Categories</option>
-            <option>Tops</option>
-            <option>Sweat Shirts</option>
-          </select>
+           <Select
+            withBg={true}
+            options={categoryOptions}
+            onChange={(val) => setOption(val)}>
+          </Select>
         </div>
       </div>
       <ProductSamples
@@ -172,13 +192,14 @@ export const ProductSamples = props => {
 export const Product = {
   TableItem(props) {
     return (
-      <Link to="/products/1" className="table-row text-sm mb-3">
-        <td className="px-3 py-8 bg-white">
+      <Link to="/products/1" className="table-row relative text-sm mb-3 bg-white hover:bg-gray-100 hover:shadow-md" 
+        style={{ zIndex: props.zIndex }}>
+        <td className="px-3 py-8 ">
           <input type="checkbox" />
         </td>
-        <td className="text-xs bg-white">{props.orderId}</td>
-        <td className="text-xs bg-white">{props.item}</td>
-        <td className="text-xs bg-white">
+        <td className="text-xs ">{props.orderId}</td>
+        <td className="text-xs ">{props.item}</td>
+        <td className="text-xs align-middle">
           <div className="flex items-center pr-3">
             <img
               className="w-10 h-10 flex-shrink-0 mr-4"
@@ -188,7 +209,7 @@ export const Product = {
             <span>{props.details}</span>
           </div>
         </td>
-        <td className="bg-white">
+        <td className="">
           <div
             className="p-3 rounded-lg text-center inline-block"
             style={{ backgroundColor: props.colors[1].color }}
@@ -196,11 +217,11 @@ export const Product = {
             {props.colors[1].name}
           </div>
         </td>
-        <td className="font-bold bg-white">L X {props.quantity}</td>
-        <td className="font-bold bg-white">{props.printType}</td>
-        <td className="w-32 bg-white">
+        <td className="font-bold ">L X {props.quantity}</td>
+        <td className="font-bold ">{props.printType}</td>
+        <td className="w-32 ">
           {props.deliveryMethod === RUSH_SHIPPING && (
-            <div className="flex">
+            <div className="flex items-center">
               <img
                 src={require("../assets/icons/clock.svg")}
                 alt="icon"
@@ -215,11 +236,13 @@ export const Product = {
             <span className="text-blue-600">Pickup Order</span>
           )}
         </td>
-        <td className="bg-white">{props.deliveryTime}</td>
-        <td className="bg-white text-green-600">
-          Running <br />
+        <td className="">{props.deliveryTime}</td>
+        <td className="text-green-600">
+          <span>
+          Running {" "}
           {props.productionStatus.currentStep} of{" "}
           {props.productionStatus.totalSteps}
+          </span>
         </td>
       </Link>
     );

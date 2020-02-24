@@ -21,14 +21,14 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex-1 text-xs px-5">
-        <p>
+        <p className="opacity-50">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
           rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
           ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
         </p>
-        <article class="flex w-full mt-10 text-primary">
+        <article class="flex w-full mt-10 text-primary justify-center">
           <span className="px-2">Lorem ipsum dolor sit amet</span>
           <span className="px-2">Lorem ipsum dolor sit amet</span>
           <span className="px-2">Lorem ipsum dolor sit amet</span>

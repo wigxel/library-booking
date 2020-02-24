@@ -43,7 +43,7 @@ const SearcInputStyle = styled.div`
 
   input {
     flex: 1 1;
-    margin-right: -222px;
+    margin-right: -160px;
     box-sizing: border-box;
     transition: all 0.3s ease-out;
   }

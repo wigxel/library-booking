@@ -1,6 +1,7 @@
 import React from "react";
 import { OrderDetails, ProductDetails } from "../components/Product";
 import { Link } from "react-router-dom";
+import Icons from '../components/Icons';
 
 const OrderInfo = () => {
   return (
@@ -32,7 +33,8 @@ const OrderInfo = () => {
 
           <span className="ml-4 opacity-50">Back</span>
         </div>
-        <h1 className="border-l text-2xl border-gray-500 px-3 flex-1">
+        <h1 className="border-l text-2xl border-gray-200 px-3 flex-1">
+          {Icons.Package}
           Production House
         </h1>
       </section>

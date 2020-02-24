@@ -84,3 +84,10 @@ Tab.Holder = styled.div`
   display: flex;
   justify-content: start;
 `;
+
+export const Button = (props) => {
+  const activeClass = !props.disabled ? 'bg-primary' : ' bg-gray-400';
+  return <button className={`${activeClass} text-white rounded-lg px-4 mx-2 py-2 text-sm`}>
+    {props.children}
+  </button>
+};
