@@ -109,7 +109,7 @@ export const ProductDetails = () => {
             options={Select.options(["Worksheet", "Invoice"])}
             onChange={(val) => setOption(val)}>
           </Select>
-          <Button disabled={option !== 'Invoice'}>
+          <Button disabled={option.text !== 'Invoice'}>
             Print
           </Button>
           <button className="border border-gray-200 rounded-lg px-4 py-2 text-sm mx-2">
