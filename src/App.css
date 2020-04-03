@@ -6,13 +6,19 @@
   display:flex;
   justify-content:center;
   padding:20px;
-  
-
-
+  gap: 2rem;
 }
+
+.container > section {
+  width: 400px;
+  margin-left: 30px;
+}
+
 .add_book:hover{
-  background-color: aqua;
+  color: #333;
+  background-color: rgb(103, 250, 108);
 }
+
 input[type=text]{
   width: 100%;
   padding: 12px;
