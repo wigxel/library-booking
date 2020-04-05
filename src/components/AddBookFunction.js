@@ -1,5 +1,8 @@
 import React from "react";
 import { string, object, number } from 'yup';
+import { Labelled, Button } from '@wigxel/react-components';
+
+const { Input } = Labelled;
 
 let schema = object().shape({
   booktitle: string().required().min(5),
@@ -18,6 +21,7 @@ const default_state = {
 
 export default function AddBook (props) {
     const [state, setState] = React.useState(default_state);
+    const reset = () => setState(default_state);
     const curUpdateField = (fieldName) => (evt) => {
         setState({ 
             ...state, 
@@ -29,7 +33,7 @@ export default function AddBook (props) {
       // schema.isValid(state).then((result) => {});
       schema.validate(state).then((result) => {
         props.onSubmitBook({ ...state });
-        setState(default_state);
+        reset()
       }).catch((err) => {
         // add the `err.errors` here into the state[errors]
         setState({...state, errors: err.errors })
@@ -45,44 +49,55 @@ export default function AddBook (props) {
         {state.errors.map((error,index)=> {
           return <li key ={index}>{error}</li>
         })}
-        <label for="booktitle">Book Title</label>
-         <input
+         <Input
           type="text"
+          label="Book Title"
           name="booktitle"
+          fullwidth
           placeholder="Harry Potter.."
           value={state.booktitle}
           onChange={curUpdateField("booktitle")}
         />
         <br />
-        <label for="quantity">Quantity</label>
-        <input
-          type="text"
+      
+        <Input
+          type="number"
+          label="Quantity"
           name="quantity"
-          value={state.quantity}
           placeholder="15"
+          value={state.quantity}
+          fullwidth
           onChange={curUpdateField("quantity")}
         />
         <br />
-        <label for="author">Author</label>
-        <input
+      
+        <Input
           type="text"
+          label="Author"
+          fullwidth
           name="author"
           value={state.author}
           placeholder="J.K Rowling.."
           onChange={curUpdateField("author")}
         />
         <br />
-        <label for="category">Category</label>
-        <select name="category"
+        <Labelled.Select 
+          label="Category"
+          name="category"
+          fullwidth
           onChange={curUpdateField("category")}>
           <option>Fantasy</option>
           <option>Sci-Fiction</option>
           <option>Adventure</option>
-        </select>
+        </Labelled.Select>
         <br />
-        <button className="add_book" type="submit">
-          ADD BOOK
-        </button>
+        <div style={{textAlign: 'center'}}>
+          <Button primary>ADD BOOK</Button>
+          <Button danger outline type="button" onClick={(evt) => {
+            evt.preventDefault();
+            reset();
+          }}>RESET</Button>
+        </div>
       </form>
     )
 }

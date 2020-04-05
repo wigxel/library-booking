@@ -2,6 +2,7 @@
 *{
   box-sizing:border-box;
 }
+
 .container{
   display:flex;
   justify-content:center;
@@ -19,18 +20,6 @@
   background-color: rgb(103, 250, 108);
 }
 
-input[type=text]{
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  resize: vertical;
-}
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-}
 .add_book{
   background-color: #4CAF50;
   color: white;
