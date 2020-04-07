@@ -16,7 +16,7 @@ const default_state = {
     quantity: 0,
     author: "",
     category: "",
-    errors: []
+    errors: [],
 };
 
 export default function AddBook (props) {
@@ -28,11 +28,17 @@ export default function AddBook (props) {
             [fieldName]: evt.target.value
         })
     }
+
+    // const a = Symbol("id");
+    // const b = Symbol("id");
+    // Symbol("id").toString()
+    // console.log(a === a, b == b, a === b); // false
+    
     const handleSubmit = evt => {
       evt.preventDefault();
       // schema.isValid(state).then((result) => {});
       schema.validate(state).then((result) => {
-        props.onSubmitBook({ ...state });
+        props.onSubmitBook({ ...state ,id: Symbol('book_id') });
         reset()
       }).catch((err) => {
         // add the `err.errors` here into the state[errors]

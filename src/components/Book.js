@@ -17,14 +17,20 @@ const BookStyle = styled.div`
 `
 
 export default function Book(props){
+    const removeBook = (evt)=>{
+        let {id}= props
+       // console.log(id)
+        props.handleRemoveBook(id)
+    }
     return (
+    
         <BookStyle>
             <h4 className="title">{props.booktitle}</h4>
             Quantity: {props.quantity} <br/>
             Author: {props.author} <br/>
             Category : {props.category}
             <br />
-            <Button outline>Remove</Button>
+            <Button outline onClick={removeBook}>Remove</Button>
         </BookStyle>
     )
 }

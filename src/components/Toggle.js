@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Toggle(props) {
     const [state, setState] = React.useState(false);
-    const [pin, setPin] = React.useState("");
+  //  const [pin, setPin] = React.useState("");
 
     // React.useEffect(() => {
     //     fetch('https://jsonplaceholder.typicode.com/todos/1')

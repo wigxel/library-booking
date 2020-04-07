@@ -30,3 +30,19 @@
   margin:10px 0 0 29%;
   border-radius: 25px;
 }
+nav{
+  background-color: rebeccapurple;
+  height:60px
+}
+.nav_link{
+  color: aliceblue;
+  float:right;
+  padding-top: 20px;
+  padding-right: 60px;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.nav_link:hover{
+  text-transform: uppercase;
+  color:papayawhip;
+}
