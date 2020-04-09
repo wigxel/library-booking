@@ -1,6 +1,7 @@
 import React from "react";
 import { string, object, number } from 'yup';
 import { Labelled, Button } from '@wigxel/react-components';
+import Alert from './Alert'
 
 const { Input } = Labelled;
 
@@ -20,8 +21,14 @@ const default_state = {
 };
 
 export default function AddBook (props) {
+    const [message, setMessage] = React.useState({ text: "", type: "" });
     const [state, setState] = React.useState(default_state);
-    const reset = () => setState(default_state);
+
+    const reset = () => {
+      setState(default_state)
+      setMessage({text:'',type:''})
+    };
+
     const curUpdateField = (fieldName) => (evt) => {
         setState({ 
             ...state, 
@@ -38,11 +45,15 @@ export default function AddBook (props) {
       evt.preventDefault();
       // schema.isValid(state).then((result) => {});
       schema.validate(state).then((result) => {
-        props.onSubmitBook({ ...state ,id: Symbol('book_id') });
-        reset()
+        setMessage({ text:'Book has been added', type:'success' })
+        setTimeout(() => {
+          props.onSubmitBook({ ...state ,id: Symbol('book_id') }); 
+          reset()
+        }, 5000) 
       }).catch((err) => {
         // add the `err.errors` here into the state[errors]
         setState({...state, errors: err.errors })
+        setMessage({text:'There was an error', type:'danger'})
         // console.log(err.name, err.errors);
       })
     }
@@ -52,6 +63,7 @@ export default function AddBook (props) {
             onSubmit={handleSubmit}
         >
         <h1>Add A Book</h1>
+        {message.text && <Alert message={message.text} type={message.type} />}
         {state.errors.map((error,index)=> {
           return <li key ={index}>{error}</li>
         })}

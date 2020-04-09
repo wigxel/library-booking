@@ -3,17 +3,10 @@ import React from 'react';
 import './App.css';
 import Book from './components/Book'
 import AddBook from './components/AddBookFunction'
-import Toggle from './components/Toggle'
-import { Light, Dark } from './Theme';
+// import Toggle from './components/Toggle'
+import { Light } from './Theme';
 import { ThemeProvider } from '@wigxel/react-components'
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-
-//JSON.parse() // cast string -> object
-// Retreive the existing data from localStorage
-// Set that data as the default state for the App component
-//localStorage.getItem("book") // string | null
-//localStorage.getItem("users") // -> null
-// useState | useEffect 
 
 // persist data book state to localStorage
 const data =  JSON.parse(localStorage.getItem("books"))
@@ -25,10 +18,10 @@ if (data) {
 }
 
 function App() {
+  // create a state
+  const [theme] = React.useState(Light)
   const [state, setState] = React.useState(data? data :[])
 
-  // create a state
-  const [theme, setTheme] = React.useState(Light)
 
   // Context API
   return ( 
@@ -75,7 +68,7 @@ const BooksPage = ({ state, setState }) => {
 
   return (
   <section>
-    <h1>Books</h1>
+    <h1> Books</h1>
     {state.map((book, index) =>
       <Book key={index} {...book}  handleRemoveBook={handleRemoveBook}/>
     )}

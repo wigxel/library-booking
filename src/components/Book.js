@@ -17,7 +17,8 @@ const BookStyle = styled.div`
 `
 
 export default function Book(props){
-    const removeBook = (evt)=>{
+
+     const removeBook = (evt)=>{
         let {id}= props
        // console.log(id)
         props.handleRemoveBook(id)

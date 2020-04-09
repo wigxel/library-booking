@@ -11,6 +11,12 @@ const Generic = {
 	},
 	check: {
 		// labelBg: "#705DF5"
+	},
+	alert : {
+		info: { bgColor: "dodgerblue" },
+		danger: { bgColor: "crimson" },
+		success: { bgColor: "limegreen" },
+		warning: { bgColor: "yellow", textColor: "#333" }
 	}
 }
 
