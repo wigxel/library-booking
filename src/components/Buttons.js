@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css } from "@wigxel/react-components";
 
 const ToggleButtonStyle = styled.button`
   span {
@@ -13,8 +13,8 @@ const ToggleButtonStyle = styled.button`
     transform-origin: center center;
 
 	  ${props => props.state && css`
-	  	background-color: blue;
 	  	height: 2px;
+	  	background-color: dodgerblue;
 	  `}
   }
 `;
@@ -106,3 +106,35 @@ export const Button = (props) => {
     {props.children}
   </button>
 };
+
+const StyledThemeToggle = styled.button`
+	overflow: hidden;
+
+	&, &::after {
+		background-color: yellow;
+		${props => props.isDay && css`
+			background-color: lightblue;
+		`}
+		border-radius: 50%;
+		height: 1.1rem;
+		width: 1.1rem;
+		transition: all .2s ease-in;
+	}
+	
+	&::after {
+		content: "";
+		display: block;
+		transform: translateX(-70%);
+		background-color: ${props => props.theme.bgColor || "orange" };
+
+		${props => props.isDay && css`
+			transform: translateX(-30%);
+		`}
+	}
+`
+
+export const ThemeToggle = (props) => {
+	return (
+		<StyledThemeToggle {...props}/>
+	)
+}

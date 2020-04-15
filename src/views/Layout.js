@@ -1,10 +1,11 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, ThemeProvider } from "@wigxel/react-components";
 import Header from "../components/Header";
 import NavItem from "../components/NavItem";
 import { NotificationBar } from '../components/NotificationBar'
 import { IconLinks } from '../components/Icons';
 import { useLayout } from '../libs/LayoutStore';
+import { Light, Dark } from '../libs/Theme';
 import { navLinks } from '../libs/data/navigation';
 
 const SidebarStyle = styled.aside`
@@ -74,7 +75,9 @@ const MainArea = ({ children }) => {
 };
 
 const Layout = ({ children }) => {
-  return (
+	const { store } = useLayout();
+
+  return (<ThemeProvider theme={store.isDark ? Dark : Light }>
     <section
       className="min-h-screen"
       style={{ backgroundColor: "#FCFCFC" }}
@@ -88,6 +91,7 @@ const Layout = ({ children }) => {
 	      <NotificationBar />
       </section>
     </section>
+    </ThemeProvider>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css } from "@wigxel/react-components";
 import { useLayout } from '../libs/LayoutStore';
 import t from "prop-types";
 import * as R from "ramda";

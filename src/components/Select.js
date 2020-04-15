@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css } from '@wigxel/react-components';
 import { map } from 'ramda';
 
 const Options = styled.div`

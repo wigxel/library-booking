@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
-import { ToggleButton } from './Buttons'
+import styled, { css } from "@wigxel/react-components";
+import { ToggleButton, ThemeToggle } from './Buttons'
 import { useLayout } from '../libs/LayoutStore'
 
 const HeaderStyle = styled.header`
@@ -79,14 +79,14 @@ const SearchInput = props => {
 };
 
 const Header = () => {
-	const { store, dispatch } = useLayout()
+	const { store, action } = useLayout()
 
   return (
     <HeaderStyle className="bg-white sticky p-3" style={{ top: 0 }}>
       <ToggleButton 
       	state={store.menuOpen} 
-      	onClick={() => dispatch({ type: 'TOGGLE' })} />
-      <div className="flex justify-between container mx-auto">
+      	onClick={action({ type: 'TOGGLE' })} />
+      <div className="flex justify-between container mx-auto pl-3">
         <embed
           src={require("../assets/icons/logo.svg")}
           className="w-20"
@@ -96,6 +96,7 @@ const Header = () => {
           <div>
             <SearchInput onChange={evt => console.log(evt)} />
           </div>
+          <ThemeToggle isDay={!store.darkMode} onClick={action({ type: 'TOGGLE_DARK_MODE'})}/>
           <div className="px-4 text-sm pr-0">
             <img
               className="w-8 h-8 bg-gray-200 rounded-full border border-blue-500"
@@ -107,7 +108,7 @@ const Header = () => {
 	            alt=""
 	            className="w-8 h-8 text-blue-200"
 	            src={require("../assets/icons/bell.svg")}
-	            onClick={() => dispatch({ type: 'TOGGLE_NOTIF' })}
+	            onClick={action({ type: 'TOGGLE_NOTIF' })}
 	          />
         </section>
       </div>
