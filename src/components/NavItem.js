@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
+import { useLayout } from '../libs/LayoutStore';
 import t from "prop-types";
 import * as R from "ramda";
 
-export const SidebarCtx = React.createContext({ expanded: false });
-
 const NavItemStyle = styled.li`
-  color: white;
+  color: #333;
+  font-family: 1em;
+  margin: .5rem  0;
+  font-family: "Sen";
   transition: background-color 0.2s ease;
-
-  > div {
-    border-bottom: solid 1px rgba(0, 0, 0, 0.16);
-  }
 
   span {
     font: medium 1rem "Helvetica Neue";
@@ -20,7 +18,9 @@ const NavItemStyle = styled.li`
   ${props =>
     props.active &&
     css`
-      color: #196bd8;
+	    color: dodgerblue;
+	    border-radius: 0 30px 30px 0;
+
       .icon {
         background-color: #cee6ff;
       }
@@ -39,15 +39,16 @@ const prop = R.curry((prop, style, props) => {
 
 const IconStyle = styled.span`
   &.icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
+    width: 40px;
+    height: 40px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
+    margin: 0 .5rem;
+    align-items: center;
+    border-radius: 25px;
+    justify-content: center;
 
-    .activity-badge {
+    .a-badge {
       min-width: 20px;
       line-height: 20px;
       text-align: center;
@@ -56,7 +57,8 @@ const IconStyle = styled.span`
       border: 0;
       font-size: 0.7rem;
       top: 0;
-      background-color: #ff0000;
+      background-color: #fff;
+      color: dodgerblue;
       right: 0;
       border-radius: 16px;
 
@@ -69,7 +71,8 @@ const IconStyle = styled.span`
     }
 
     img {
-      width: 25px;
+      width: 30px;
+
       ${prop(
         "small",
         css`
@@ -87,23 +90,23 @@ export const Icon = ({ small, className, bgColor, activity, icon }) => {
       small={small}
       bgColor={bgColor}
     >
-      {activity && <span className="activity-badge">{activity}</span>}
+      {activity && <span className="a-badge">{activity}</span>}
       {icon}
     </IconStyle>
   );
 };
 
 const NavItem = ({ icon, activity, active, children }) => {
-  const ctx = useContext(SidebarCtx);
+	const { store } = useLayout()
 
   return (
     <NavItemStyle
-      showBg={ctx.expanded}
+      showBg={store.menuOpen}
       active={active}
-      className="nav-item w-full block px-3"
+      className="nav-item my-1 w-full block px-3"
     >
-      <div className="py-2 w-full flex items-center">
-        <Icon activity={activity} className="mr-5" icon={icon} />
+      <div className="w-full flex items-center">
+        <Icon activity={activity} icon={icon} />
         <span>{children}</span>
       </div>
     </NavItemStyle>

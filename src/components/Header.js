@@ -1,35 +1,28 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { Icon } from "./NavItem";
+import { ToggleButton } from './Buttons'
+import { useLayout } from '../libs/LayoutStore'
 
 const HeaderStyle = styled.header`
   z-index: 6;
-  height: 80px;
   display: flex;
   position: sticky;
+  min-height: 60px;
   box-shadow: 0px 1px 25px #1877ff1c;
 
   .sec-nav {
     > * {
-      border-left: solid 1px rgba(0, 0, 0, 0.16);
+      // border-left: solid 1px rgba(0, 0, 0, 0.16);
     }
   }
 `;
-
-const topNav = [
-  { text: "Message", icon: require("../assets/icons/mail.svg") },
-  {
-    text: "Market Place",
-    icon: require("../assets/icons/shopping-cart-black.svg")
-  },
-  { text: "Notifications", icon: require("../assets/icons/mail.svg") }
-];
 
 const SearcInputStyle = styled.div`
   max-width: 250px;
   display: flex;
   flex: 1;
   overflow: hidden;
+
   ${props =>
     props.open &&
     css`
@@ -73,14 +66,6 @@ const SearchInput = props => {
       onMouseEnter={handleOpen(true)}
       onMouseLeave={handleOpen(false)}
     >
-      <Icon
-        icon={
-          <img
-            src={require("../assets/icons/magnifying-glass.svg")}
-            alt="search"
-          />
-        }
-      />
       <input
         type="text"
         className="px-2"
@@ -94,37 +79,36 @@ const SearchInput = props => {
 };
 
 const Header = () => {
+	const { store, dispatch } = useLayout()
+
   return (
-    <HeaderStyle className="bg-white sticky p-3 px-5" style={{ top: 0 }}>
+    <HeaderStyle className="bg-white sticky p-3" style={{ top: 0 }}>
+      <ToggleButton 
+      	state={store.menuOpen} 
+      	onClick={() => dispatch({ type: 'TOGGLE' })} />
       <div className="flex justify-between container mx-auto">
         <embed
           src={require("../assets/icons/logo.svg")}
-          className="w-48"
+          className="w-20"
           alt="Logo"
         />
         <section className="sec-nav flex justify-end items-center">
           <div>
             <SearchInput onChange={evt => console.log(evt)} />
           </div>
-          {topNav.map(({ icon, text }, idx) => (
-            <div key={idx} className="pl-2 pr-4 flex items-center">
-              <Icon
-                small={true}
-                activity="23"
-                className="mr-2"
-                bgColor="#007BFF"
-                icon={<img src={icon} alt={text} />}
-              />
-              <span className="text-sm text-gray-500">{text}</span>
-            </div>
-          ))}
           <div className="px-4 text-sm pr-0">
             <img
-              className="w-10 h-10 bg-gray-200 rounded-full border border-blue-500"
+              className="w-8 h-8 bg-gray-200 rounded-full border border-blue-500"
               src={require("../assets/icons/settings.svg")}
               alt="Avatar"
             />
           </div>
+	          <img
+	            alt=""
+	            className="w-8 h-8 text-blue-200"
+	            src={require("../assets/icons/bell.svg")}
+	            onClick={() => dispatch({ type: 'TOGGLE_NOTIF' })}
+	          />
         </section>
       </div>
     </HeaderStyle>

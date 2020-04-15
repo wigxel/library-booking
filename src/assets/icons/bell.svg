@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145 145">
+	<defs>
+		<style>
+			.cls-2 { stroke-miterlimit:10; }
+			.cls-2 { fill:none; stroke: currentColor; stroke-linecap:round; stroke-width:5px; }
+		</style>
+		</defs>
+		<title>notification</title>
+		<path class="cls-2" d="M108.74,85.77v13.7H36.26V63.23a36.24,36.24,0,0,1,72.48,0"/>
+		<path class="cls-2" d="M83.52,107a11,11,0,1,1-22,0"/>
+	</svg>

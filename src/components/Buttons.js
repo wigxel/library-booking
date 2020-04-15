@@ -3,17 +3,24 @@ import styled, { css } from "styled-components";
 
 const ToggleButtonStyle = styled.button`
   span {
-    height: 2px;
+    height: 1px;
     width: 35px;
     display: block;
     border-radius: 30px;
     margin-bottom: 5px;
-    background: white;
+    background: gray;
     transition: 0.2s ease-in;
     transform-origin: center center;
-  }
 
-  ${props =>
+	  ${props => props.state && css`
+	  	background-color: blue;
+	  	height: 2px;
+	  `}
+  }
+`;
+
+const XToggleButtonStyle = styled(ToggleButtonStyle)`
+ ${props =>
     props.state &&
     css`
       span {
@@ -31,10 +38,18 @@ const ToggleButtonStyle = styled.button`
         transform: rotate(-45deg) translate(-3px, 9px);
       }
     `}
-`;
+`
+
+export const XToggleButton = ({ state, onClick }) => (
+  <XToggleButtonStyle state={state} className="ml-3 w-12 h-12" onClick={onClick}>
+    <span></span>
+    <span></span>
+    <span></span>
+  </XToggleButtonStyle>
+);
 
 export const ToggleButton = ({ state, onClick }) => (
-  <ToggleButtonStyle state={state} className="ml-3 w-12 h-12" onClick={onClick}>
+  <ToggleButtonStyle state={state} className="ml-3" onClick={onClick}>
     <span></span>
     <span></span>
     <span></span>

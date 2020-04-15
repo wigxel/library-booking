@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
-import { ToggleButton } from "../components/Buttons";
-import NavItem, { SidebarCtx } from "../components/NavItem";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+import NavItem from "../components/NavItem";
+import { NotificationBar } from '../components/NotificationBar'
 import { IconLinks } from '../components/Icons';
+import { useLayout } from '../libs/LayoutStore';
+import { navLinks } from '../libs/data/navigation';
 
 const SidebarStyle = styled.aside`
-  top: 0;
-  width: 80px;
-  height: 100vh;
+  top: 60px;
+  width: 60px;
+  height: calc(100vh - 80px);
   display: flex;
   position: sticky;
   overflow: hidden;
-  background-color: #007bff;
   flex-flow: column nowrap;
   justify-content: space-between;
   transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1);
@@ -21,8 +21,7 @@ const SidebarStyle = styled.aside`
   ${props =>
     props.expand &&
     css`
-      width: 20rem;
-      background: #196bd8;
+      width: 20vw;
     `}
 
   > div#toggle-area {
@@ -31,73 +30,38 @@ const SidebarStyle = styled.aside`
   }
 `;
 
-const navLinks = [
-  {
-    icon: IconLinks.FileGray,
-    text: "Dashboard",
-  },
-  {
-    icon: IconLinks.Clock,
-    text: "Operations",
-    activity: 8
-  },
-  {
-    icon: IconLinks.File,
-    text: "Records"
-  },
-  {
-    icon: IconLinks.Cart,
-    text: "Supply Store",
-    activity: 30
-  },
-  {
-    icon: IconLinks.Supply,
-    text: "Market Place"
-  },
-  {
-    icon: IconLinks.Chat,
-    text: "Forums"
-  }
-];
-
 export const SideBar = props => {
-  const [showNav, setShowNav] = useState(false);
+	const { store } = useLayout()
 
   return (
-    <SidebarCtx.Provider value={{ expanded: showNav }}>
-      <SidebarStyle expand={showNav} className="p-3">
-        <div id="toggle-area">
-          <ToggleButton state={showNav} onClick={() => setShowNav(!showNav)} />
-          <div className="border-b border-black opacity-25 w-full"></div>
-        </div>
-        <nav className="-mx-3" style={{ minWidth: "15rem" }}>
-          {navLinks.map((e, idx) => {
-            return (
-              <NavItem
-                active={e.text === 'Operations'}
-                key={idx}
-                activity={e.activity}
-                icon={<img src={e.icon} alt={e.text} />}
-              >
-                {e.text}
-              </NavItem>
-            );
-          })}
-        </nav>
-        <nav className="-mx-3" style={{ minWidth: "15rem" }}>
-          <NavItem
-            icon={
-              <img
-                src={IconLinks.Settings}
-                alt="Settings"
-              />
-            }
-          >
-            Settings
-          </NavItem>
-        </nav>
-      </SidebarStyle>
-    </SidebarCtx.Provider>
+    <SidebarStyle expand={store.menuOpen} className="p-3">
+      <nav className="-mx-3" style={{ minWidth: "250px" }}>
+        {navLinks.map((e, idx) => {
+          return (
+            <NavItem
+              key={idx}
+              activity={e.activity}
+              active={e.text === 'Dashboard'}
+              icon={<img src={e.icon} alt={e.text} />}
+            >
+              {e.text}
+            </NavItem>
+          );
+        })}
+      </nav>
+      <nav className="-mx-3" style={{ minWidth: "15rem" }}>
+        <NavItem
+          icon={
+            <img
+              src={IconLinks.Settings}
+              alt="Settings"
+            />
+          }
+        >
+          Settings
+        </NavItem>
+      </nav>
+    </SidebarStyle>
   );
 };
 
@@ -112,14 +76,16 @@ const MainArea = ({ children }) => {
 const Layout = ({ children }) => {
   return (
     <section
-      className="flex min-h-screen"
+      className="min-h-screen"
       style={{ backgroundColor: "#FCFCFC" }}
     >
-      <SideBar expand={true}></SideBar>
-      <section className="flex-1">
-        <Header />
-        <MainArea>{children}</MainArea>
-        <Footer />
+      <Header />
+      <section className="flex">
+	      <SideBar expand={true}></SideBar>
+	      <div className="flex-1">
+		      <MainArea>{children}</MainArea>
+	      </div>
+	      <NotificationBar />
       </section>
     </section>
   );

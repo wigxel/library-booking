@@ -1,19 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./views/Home";
 import Layout from "./views/Layout";
-import OrderInfo from "./views/OrderInfo";
+import { LayoutProvider } from './libs/LayoutStore';
 
 const App = () => {
   return (
-    <Router>
-      <Layout>
-        <Switch>
-          <Route path="/products/:id" exact component={OrderInfo} />
-          <Route path="/" exact component={Home} />
-        </Switch>
-      </Layout>
-    </Router>
+  	<LayoutProvider>
+	    <Router>
+	      <Layout>
+	      </Layout>
+	    </Router>
+    </LayoutProvider>
   );
 };
 
