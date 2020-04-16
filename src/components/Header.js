@@ -8,7 +8,9 @@ const HeaderStyle = styled.header`
   display: flex;
   position: sticky;
   min-height: 60px;
-  box-shadow: 0px 1px 25px #1877ff1c;
+  ${props => console.log("BG Color", props.theme.bgColor)};
+  background-color: ${props => props.theme.bgColor || "#333"};
+  box-shadow: 0px 1px 25px ${props => props.theme.shadowColor};
 
   .sec-nav {
     > * {
@@ -82,7 +84,7 @@ const Header = () => {
 	const { store, action } = useLayout()
 
   return (
-    <HeaderStyle className="bg-white sticky p-3" style={{ top: 0 }}>
+    <HeaderStyle className="sticky p-3" style={{ top: 0 }}>
       <ToggleButton 
       	state={store.menuOpen} 
       	onClick={action({ type: 'TOGGLE' })} />
@@ -93,10 +95,10 @@ const Header = () => {
           alt="Logo"
         />
         <section className="sec-nav flex justify-end items-center">
-          <div>
+          <div className="hidden">
             <SearchInput onChange={evt => console.log(evt)} />
           </div>
-          <ThemeToggle isDay={!store.darkMode} onClick={action({ type: 'TOGGLE_DARK_MODE'})}/>
+          <ThemeToggle isDarkMode={store.isDarkMode} onClick={action({ type: 'TOGGLE_DARK_MODE'})} />
           <div className="px-4 text-sm pr-0">
             <img
               className="w-8 h-8 bg-gray-200 rounded-full border border-blue-500"

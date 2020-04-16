@@ -5,11 +5,11 @@ import t from "prop-types";
 import * as R from "ramda";
 
 const NavItemStyle = styled.li`
-  color: #333;
   font-family: 1em;
   margin: .5rem  0;
-  font-family: "Sen";
+  padding: .5rem 0;
   transition: background-color 0.2s ease;
+  color: ${props => props.theme.textColor};
 
   span {
     font: medium 1rem "Helvetica Neue";
@@ -103,7 +103,7 @@ const NavItem = ({ icon, activity, active, children }) => {
     <NavItemStyle
       showBg={store.menuOpen}
       active={active}
-      className="nav-item my-1 w-full block px-3"
+      className="nav-item w-full block px-3"
     >
       <div className="w-full flex items-center">
         <Icon activity={activity} icon={icon} />

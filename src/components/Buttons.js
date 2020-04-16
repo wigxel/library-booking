@@ -2,6 +2,8 @@ import React from "react";
 import styled, { css } from "@wigxel/react-components";
 
 const ToggleButtonStyle = styled.button`
+	&:focus { outline: none; }
+
   span {
     height: 1px;
     width: 35px;
@@ -109,11 +111,12 @@ export const Button = (props) => {
 
 const StyledThemeToggle = styled.button`
 	overflow: hidden;
+	&:focus { outline: none; }
 
 	&, &::after {
-		background-color: yellow;
-		${props => props.isDay && css`
-			background-color: lightblue;
+		background-color: lightblue;
+		${props => props.isDarkMode && css`
+			background-color: orange;
 		`}
 		border-radius: 50%;
 		height: 1.1rem;
@@ -124,17 +127,17 @@ const StyledThemeToggle = styled.button`
 	&::after {
 		content: "";
 		display: block;
-		transform: translateX(-70%);
-		background-color: ${props => props.theme.bgColor || "orange" };
+		background-color: #333;
+		transform: translateX(-30%);
 
-		${props => props.isDay && css`
-			transform: translateX(-30%);
+		${props => props.isDarkMode && css`
+			transform: translateX(-70%);
 		`}
 	}
 `
 
 export const ThemeToggle = (props) => {
 	return (
-		<StyledThemeToggle {...props}/>
+		<StyledThemeToggle {...props} title="Toggle Dark Mode"/>
 	)
 }

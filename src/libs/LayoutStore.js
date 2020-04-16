@@ -3,7 +3,7 @@ import React from 'react';
 let initial_state = {
 	menuOpen: true,
 	showNotif: true,
-	darkMode: false
+	isDarkMode: window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
 const ctx = React.createContext()
@@ -17,7 +17,7 @@ const reducer = (state, action) => {
 			return { ...state, showNotif: !state.showNotif }
 		}
 		case "TOGGLE_DARK_MODE": {
-			return { ...state, darkMode: !state.darkMode }
+			return { ...state, isDarkMode: !state.isDarkMode }
 		}
 		default: {
 			return state
@@ -26,7 +26,8 @@ const reducer = (state, action) => {
 }
 
 if (process.browser) {
-	initial_state = JSON.parse(localStorage.getItem("app/layout"));
+	const value = JSON.parse(localStorage.getItem("app/layout"));
+	if (value) initial_state = value;
 }
 
 export const LayoutProvider = ({ children }) => {

@@ -4,7 +4,8 @@ import { IconLinks } from '../components/Icons';
 import { useLayout } from "../libs/LayoutStore"
 
 const NotifStyle = styled.aside`
-	background-color: white;
+	background-color: ${props => props.theme.bgColor};
+	color: ${props => props.theme.textColor};
 	position: fixed;
 	right: 0;
 	top: 0;
@@ -12,7 +13,7 @@ const NotifStyle = styled.aside`
 	width: 25vw;
 	height: 100vh;
 	padding: 1.5rem;
-	box-shadow: -3px 0 12px -12px rgba(0,0,0, .25);
+	box-shadow: -3px 0 12px -6px ${props => props.theme.shadowColor};
 	transform: translateX(100%);
 	transition: transform .3s ease-out;
 

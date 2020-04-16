@@ -74,23 +74,25 @@ const MainArea = ({ children }) => {
   );
 };
 
+const StyledLayout = styled.section`
+	background-color: ${props => props.theme.whitesmoke};
+`
+
 const Layout = ({ children }) => {
 	const { store } = useLayout();
 
-  return (<ThemeProvider theme={store.isDark ? Dark : Light }>
-    <section
-      className="min-h-screen"
-      style={{ backgroundColor: "#FCFCFC" }}
-    >
-      <Header />
-      <section className="flex">
-	      <SideBar expand={true}></SideBar>
-	      <div className="flex-1">
-		      <MainArea>{children}</MainArea>
-	      </div>
-	      <NotificationBar />
-      </section>
-    </section>
+  return (
+  	<ThemeProvider theme={store.isDarkMode ? Dark : Light }>
+	    <StyledLayout className="min-h-screen">
+	      <Header />
+	      <section className="flex">
+		      <SideBar expand={true}></SideBar>
+		      <div className="flex-1">
+			      <MainArea>{children}</MainArea>
+		      </div>
+		      <NotificationBar />
+	      </section>
+	    </StyledLayout>
     </ThemeProvider>
   );
 };
