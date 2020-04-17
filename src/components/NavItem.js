@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "@wigxel/react-components";
 import { useLayout } from '../libs/LayoutStore';
 import t from "prop-types";
-import * as R from "ramda";
+import { curry } from "ramda";
 
 const NavItemStyle = styled.li`
   font-family: 1em;
@@ -10,6 +10,12 @@ const NavItemStyle = styled.li`
   padding: .5rem 0;
   transition: background-color 0.2s ease;
   color: ${props => props.theme.textColor};
+	
+	${props => (props.isDarkMode && !props.active) && css`
+		.icon img {
+			filter: invert(1);
+		}
+	`}
 
   span {
     font: medium 1rem "Helvetica Neue";
@@ -33,7 +39,7 @@ const NavItemStyle = styled.li`
     `}
 `;
 
-const prop = R.curry((prop, style, props) => {
+const prop = curry((prop, style, props) => {
   return props[prop] && style;
 });
 
@@ -47,7 +53,7 @@ const IconStyle = styled.span`
     align-items: center;
     border-radius: 25px;
     justify-content: center;
-
+		
     .a-badge {
       min-width: 20px;
       line-height: 20px;
@@ -102,6 +108,7 @@ const NavItem = ({ icon, activity, active, children }) => {
   return (
     <NavItemStyle
       showBg={store.menuOpen}
+      isDarkMode={store.isDarkMode}
       active={active}
       className="nav-item w-full block px-3"
     >
