@@ -10,6 +10,7 @@ const HeaderStyle = styled.header`
   min-height: 60px;
   ${props => console.log("BG Color", props.theme.bgColor)};
   background-color: ${props => props.theme.bgColor || "#333"};
+  color: ${props => props.theme.textColor || "#333"};
   box-shadow: 0px 1px 25px ${props => props.theme.shadowColor};
 
   .sec-nav {
@@ -80,20 +81,23 @@ const SearchInput = props => {
   );
 };
 
-const Header = () => {
+const Header = (props) => {
 	const { store, action } = useLayout()
 
   return (
     <HeaderStyle className="sticky p-3" style={{ top: 0 }}>
-      <ToggleButton 
-      	state={store.menuOpen} 
-      	onClick={action({ type: 'TOGGLE' })} />
+     
       <div className="flex justify-between container mx-auto pl-3">
         <embed
           src={require("../assets/icons/logo.svg")}
           className="w-20"
           alt="Logo"
         />
+
+        <p className="flex items-center font-bold capitalize">
+          {props.school || "My School"} Library
+        </p>
+
         <section className="sec-nav flex justify-end items-center">
           <div className="hidden">
             <SearchInput onChange={evt => console.log(evt)} />
