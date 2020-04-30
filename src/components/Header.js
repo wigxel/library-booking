@@ -10,6 +10,7 @@ const HeaderStyle = styled.header`
   min-height: 60px;
   ${props => console.log("BG Color", props.theme.bgColor)};
   background-color: ${props => props.theme.bgColor || "#333"};
+  color: ${props => props.theme.textColor || "#333"};
   box-shadow: 0px 1px 25px ${props => props.theme.shadowColor};
 
   .sec-nav {
@@ -80,7 +81,48 @@ const SearchInput = props => {
   );
 };
 
-const Header = () => {
+export const HomePageHeader = (props) => {
+	const { store, action } = useLayout()
+
+  return (
+    <HeaderStyle className="sticky p-3" style={{ top: 0 }}>
+     
+      <div className="flex justify-between container mx-auto pl-3">
+        <embed
+          src={require("../assets/icons/logo.svg")}
+          className="w-20"
+          alt="Logo"
+        />
+
+        <p className="flex items-center font-bold capitalize">
+          {props.school || "My School"} Library
+        </p>
+
+        <section className="sec-nav flex justify-end items-center">
+          <div className="hidden">
+            <SearchInput onChange={evt => console.log(evt)} />
+          </div>
+          <ThemeToggle isDarkMode={store.isDarkMode} onClick={action({ type: 'TOGGLE_DARK_MODE'})} />
+          <div className="px-4 text-sm pr-0">
+            <img
+              className="w-8 h-8 bg-gray-200 rounded-full border border-blue-500"
+              src={require("../assets/icons/user.svg")}
+              alt="Avatar"
+            />
+          </div>
+	          <img
+	            alt=""
+	            className="w-8 h-8 text-blue-200"
+	            src={require("../assets/icons/bell.svg")}
+	            onClick={action({ type: 'TOGGLE_NOTIF' })}
+	          />
+        </section>
+      </div>
+    </HeaderStyle>
+  );
+};
+
+export const Header = () => {
 	const { store, action } = useLayout()
 
   return (
@@ -117,5 +159,3 @@ const Header = () => {
     </HeaderStyle>
   );
 };
-
-export default Header;

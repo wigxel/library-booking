@@ -1,12 +1,14 @@
 import React from "react";
 import styled, { css, ThemeProvider } from "@wigxel/react-components";
-import { Header } from "../components/Header";
+import { HomePageHeader } from "../components/Header";
 import NavItem from "../components/NavItem";
 import { NotificationBar } from '../components/NotificationBar'
 import { IconLinks } from '../components/Icons';
 import { useLayout } from '../libs/LayoutStore';
 import { Light, Dark } from '../libs/Theme';
 import { navLinks } from '../libs/data/navigation';
+
+const GridOne = require("../assets/images/repeat-grid-1.svg")
 
 const SidebarStyle = styled.aside`
   top: 60px;
@@ -68,33 +70,45 @@ export const SideBar = props => {
 
 const MainArea = ({ children }) => {
   return (
-    <main className="p-5 pb-0 relative min-h-screen" style={{ zIndex: 3 }}>
+    <main className="pt-5 pb-0 relative min-h-screen" style={{ zIndex: 3 }}>
       {children}
     </main>
   );
 };
 
 const StyledLayout = styled.section`
-	background-color: ${props => props.theme.whitesmoke};
+  background-color: ${props => props.theme.whitesmoke};
+  color: ${props => props.theme.textColor || "#333"};
+  font-family: sans-serif;
+
+  .invert-bg {
+    background-color: ${props => props.theme.invertBg};
+  }
+
+  input:hover,
+  input:focus {
+    background-color: ${props => props.theme.whitesmoke};
+  }
+
+  .bg-grid {
+    background-size: 25% 25%;
+    
+  }
 `
 
-const Layout = ({ children }) => {
+const HomePageLayout = ({ children }) => {
 	const { store } = useLayout();
 
   return (
   	<ThemeProvider theme={store.isDarkMode ? Dark : Light }>
-	    <StyledLayout className="min-h-screen">
-	      <Header />
-	      <section className="flex">
-		      <SideBar expand={true}></SideBar>
-		      <div className="flex-1">
+	    <StyledLayout className="min-h-screen ">
+	      <HomePageHeader />
+	      <section className="">
 			      <MainArea>{children}</MainArea>
-		      </div>
-		      <NotificationBar />
 	      </section>
 	    </StyledLayout>
     </ThemeProvider>
   );
 };
 
-export default Layout;
+export default HomePageLayout;
