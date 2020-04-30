@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css, ThemeProvider } from "@wigxel/react-components";
-import Header from "../components/Header";
+import { HomePageHeader } from "../components/Header";
 import NavItem from "../components/NavItem";
 import { NotificationBar } from '../components/NotificationBar'
 import { IconLinks } from '../components/Icons';
@@ -102,7 +102,7 @@ const HomePageLayout = ({ children }) => {
   return (
   	<ThemeProvider theme={store.isDarkMode ? Dark : Light }>
 	    <StyledLayout className="min-h-screen ">
-	      <Header />
+	      <HomePageHeader />
 	      <section className="">
 			      <MainArea>{children}</MainArea>
 	      </section>

@@ -81,7 +81,7 @@ const SearchInput = props => {
   );
 };
 
-const Header = (props) => {
+export const HomePageHeader = (props) => {
 	const { store, action } = useLayout()
 
   return (
@@ -122,4 +122,3 @@ const Header = (props) => {
   );
 };
 
-export default Header;
