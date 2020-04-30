@@ -9,7 +9,7 @@ const App = () => {
   	<LayoutProvider>
 	    <Router>
 				<Switch>
-					<Route path="/home" component={HomePage} />
+					<Route exact path="/" component={HomePage} />
 					<Route path="/dashboard" component={Layout} />
 				</Switch>
 	    </Router>

@@ -106,7 +106,7 @@ export const HomePageHeader = (props) => {
           <div className="px-4 text-sm pr-0">
             <img
               className="w-8 h-8 bg-gray-200 rounded-full border border-blue-500"
-              src={require("../assets/icons/settings.svg")}
+              src={require("../assets/icons/user.svg")}
               alt="Avatar"
             />
           </div>
@@ -122,3 +122,40 @@ export const HomePageHeader = (props) => {
   );
 };
 
+export const Header = () => {
+	const { store, action } = useLayout()
+
+  return (
+    <HeaderStyle className="sticky p-3" style={{ top: 0 }}>
+      <ToggleButton 
+      	state={store.menuOpen} 
+      	onClick={action({ type: 'TOGGLE' })} />
+      <div className="flex justify-between container mx-auto pl-3">
+        <embed
+          src={require("../assets/icons/logo.svg")}
+          className="w-20"
+          alt="Logo"
+        />
+        <section className="sec-nav flex justify-end items-center">
+          <div className="hidden">
+            <SearchInput onChange={evt => console.log(evt)} />
+          </div>
+          <ThemeToggle isDarkMode={store.isDarkMode} onClick={action({ type: 'TOGGLE_DARK_MODE'})} />
+          <div className="px-4 text-sm pr-0">
+            <img
+              className="w-8 h-8 bg-gray-200 rounded-full border border-blue-500"
+              src={require("../assets/icons/settings.svg")}
+              alt="Avatar"
+            />
+          </div>
+	          <img
+	            alt=""
+	            className="w-8 h-8 text-blue-200"
+	            src={require("../assets/icons/bell.svg")}
+	            onClick={action({ type: 'TOGGLE_NOTIF' })}
+	          />
+        </section>
+      </div>
+    </HeaderStyle>
+  );
+};
