@@ -1588,10 +1588,10 @@
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
 
-"@wigxel/react-components@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@wigxel/react-components/-/react-components-1.0.8.tgz#aa589798d313d6cac993aab28d6afec07ee752e5"
-  integrity sha512-ITy5O79/Ua9d3BNd2U67iztzZN7kfnLN+vGxQXmoYAKWvGhllxGJ3Pi7FecGlxO1EztA7Xkyoxwk2mtOZID1oQ==
+"@wigxel/react-components@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@wigxel/react-components/-/react-components-1.0.9.tgz#1e4c30a62fd07ec6e6693091cb838e8b5d62a49a"
+  integrity sha512-+eLpt1BT5gB0tin/HAcTK94lznmBw28QS3mxHbUJsQsjB4MSvoqRO7pQpECQA9ysAXYvJsdYlb5v9WZ+tE1P8A==
   dependencies:
     lodash "^4.17.15"
     ramda "^0.27.0"

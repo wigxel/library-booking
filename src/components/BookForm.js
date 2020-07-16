@@ -1,9 +1,9 @@
 import React from "react";
 
 import { H1, H3, Paragraph } from './Text';
-import { Input, Checker } from "@wigxel/react-components";
+import { Input, Checker } from "@wigxel/react-components/lib/form";
 
-const SearchBookForm = props => {
+export const SearchBookForm = props => {
   return (
     <div className="w-full invert-bg py-10">
       <div className="container mx-auto">
